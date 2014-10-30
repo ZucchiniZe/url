@@ -1,0 +1,8 @@
+%form
+  .form-group
+    %label{:for => "inputEmail"} URL
+    %input#inputEmail.form-control{:placeholder => "http://", :type => "url", :name => "url" }
+  .form-group
+    %label{:for => "inputPassword"} Code (optional)
+    %input#inputPassword.form-control{:placeholder => "Code", :type => "text", :name => "code"}
+  %button.btn.btn-success{:type => "submit"} Sorten
