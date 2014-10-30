@@ -1,6 +1,6 @@
 require 'guillotine'
 require 'redis'
-require 'Haml'
+require 'haml'
 
 module Katana
     class App < Guillotine::App
