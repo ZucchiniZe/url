@@ -1,8 +1,13 @@
+%p
+  This is a url shortener to replace tinyurl and it resets all of the names for the urls
+%p
+  The code is the thing that comes after
+
 %form{:action => "", :method => "POST"}
   .form-group
     %label{:for => "inputEmail"} URL
-    %input#inputEmail.form-control{:placeholder => "http://", :type => "url", :name => "url" }
+    %input#inputEmail.form-control{:placeholder => "http://", :type => "url", :name => "url", :value => params[:url] }
   .form-group
     %label{:for => "inputPassword"} Code (optional)
-    %input#inputPassword.form-control{:placeholder => "Code", :type => "text", :name => "code"}
+    %input#inputPassword.form-control{:placeholder => "Code", :type => "text", :name => "code", :value => params[:code]}
   %button.btn.btn-success{:type => "submit"} Sorten
