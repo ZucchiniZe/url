@@ -23,10 +23,11 @@
     :javascript
       function toggleDiv(){
         if($(this).is(':checked')){
-          $('#input-url').parent().append("<label for='inputPassword'>Custom Alias (optional)</label>" +
+          $('#input-url').parent().append("<label for='input-url'>Custom Alias (optional)</label>" +
             "<input class='form-control' id='input-code' name='code' placeholder='Alias' type='text'>");
         } else {
-          $('#input-url').html('');
+          $('#input-code').remove();
+          $('label[for=input-url]').remove();
         }
       }
 
