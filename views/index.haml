@@ -1,14 +1,15 @@
 %p
   This is a url shortener to replace tinyurl and it resets all of the names for the urls
 
+.checkbox
+  %label
+    %input#alias{:type => "checkbox"} Custom Alias
+
 #inputs
   %form.input{:action => "", :method => "POST"}
     .form-group
       %label{:for => "inputEmail"} URL
       %input#input-url.form-control{:placeholder => "http://", :type => "url", :name => "url" }
-    .checkbox
-      %label
-        %input#alias{:type => "checkbox"} Custom Alias
     .code
     %button.btn.btn-success{:type => "submit"} Shorten
 
