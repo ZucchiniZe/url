@@ -5,10 +5,12 @@
     %title URL Shortener
     %link{ rel: 'stylesheet', href: '//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css' }
     %link{ rel: 'stylesheet', href: '//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css' }
-    %script{ src: 'http://code.jquery.com/jquery-2.1.1.min.js' }
+    %script{ src: '//code.jquery.com/jquery-2.1.1.min.js' }
     :css
       header { border-bottom: 1px solid #eee; }
       main { margin-top: 25px; }
+      #inputs { margin-bottom: 25px; }
+      #output-url { cursor: default }
   %body
     .row
       .col-md-offset-4.col-md-4
@@ -18,3 +20,46 @@
       .row
         .col-md-offset-4.col-md-4
           = yield
+    :javascript
+      function toggleDiv(){
+        if($(this).is(':checked')){
+          $('#input-url').parent().append("<label for='inputPassword'>Custom Alias (optional)</label>" +
+            "<input class='form-control' id='input-code' name='code' placeholder='Alias' type='text'>");
+        } else {
+          $('#input-url').html('');
+        }
+      }
+
+      $('form').submit(function(e) {
+        var form = $(e.target)
+        e.preventDefault();
+
+        $.ajax({
+          type: form.attr('method'),
+          url: form.attr('action'),
+          data: {
+            url: $('#input-url').val(),
+            code: $('#input-code').val()
+          },
+          success: function(data, status, xhr) {
+            $('#error').hide();
+            $('#output-url').show();
+            $('#output-url').val(xhr.getResponseHeader('Location')).select();
+          },
+          error: function(xhr, ajaxOptions, thrownError) {
+            $('#error').text(xhr.responseText);
+            $('#error').show();
+          }
+        });
+      });
+
+      $(function(){
+        $('#alias')
+          .change(toggleDiv)
+          .trigger('change');
+        $('#output-url').hide();
+        $('#error').hide();
+        $('#output-url').on('click',function(){
+          this.select();
+        });
+      });
